@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Skarsnuten 905 – Veibeskrivelse / Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0f14;
+    --card: rgba(20,26,36,0.7);
+    --card-border: rgba(60,75,95,0.25);
+    --accent: #d4a45a;
+    --accent-soft: rgba(212,164,90,0.12);
+    --accent-glow: rgba(212,164,90,0.25);
+    --text: #e8e4df;
+    --text-muted: #8a9ab5;
+    --text-dim: #5a6a82;
+    --snow: #f0ece6;
+    --success: #6ec89b;
+    --warning: #e8a44a;
+    --blue: #5b9bd5;
+    --radius: 16px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh; overflow-x:hidden; }
+
+
+
+  /* ===== HERO ===== */
+  .hero {
+    position:relative; height:32vh; min-height:220px; max-height:280px; margin-top:56px;
+    overflow:hidden; display:flex; align-items:flex-end;
+  }
+  .hero-bg {
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, transparent 20%, var(--bg) 100%), linear-gradient(135deg, #1a2a3a 0%, #0d1520 50%, #1a1510 100%);
+    z-index:1;
+  }
+  .hero-mountain { position:absolute; bottom:0; left:0; right:0; height:60%; z-index:0; }
+  .hero-mountain svg { width:100%; height:100%; display:block; }
+  .hero-stars { position:absolute; top:0; left:0; right:0; height:50%; z-index:0; }
+  .star { position:absolute; width:2px; height:2px; background:var(--snow); border-radius:50%; animation:twinkle 3s ease-in-out infinite; }
+  @keyframes twinkle { 0%,100%{opacity:0.2} 50%{opacity:0.9} }
+
+  .hero-content { position:relative; z-index:2; padding:0 24px 28px; width:100%; }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:6px;
+    background:var(--accent-soft); border:1px solid rgba(212,164,90,0.2);
+    border-radius:100px; padding:5px 12px; font-size:10px; font-weight:600;
+    letter-spacing:0.08em; text-transform:uppercase; color:var(--accent);
+    margin-bottom:12px; backdrop-filter:blur(10px);
+  }
+  .hero-badge svg { width:12px; height:12px; }
+  .hero h1 { font-family:'DM Serif Display',serif; font-size:28px; font-weight:400; line-height:1.15; color:var(--snow); margin-bottom:6px; }
+  .hero p { color:var(--text-muted); font-size:14px; }
+
+  /* ===== MAIN ===== */
+  .main { padding:0 20px 100px; max-width:480px; margin:0 auto; }
+
+  /* ===== MAP BUTTON ===== */
+  .map-btn {
+    display:flex; align-items:center; gap:14px; width:100%;
+    background:linear-gradient(135deg, rgba(91,155,213,0.12), rgba(91,155,213,0.06));
+    border:1px solid rgba(91,155,213,0.2); border-radius:var(--radius);
+    padding:16px 18px; color:var(--text); text-decoration:none;
+    margin-bottom:24px; transition:all 0.3s; cursor:pointer;
+  }
+  .map-btn:active { background:linear-gradient(135deg, rgba(91,155,213,0.2), rgba(91,155,213,0.1)); transform:scale(0.98); }
+  .map-btn .icon { width:42px; height:42px; background:rgba(91,155,213,0.15); border-radius:11px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .map-btn .icon svg { width:20px; height:20px; }
+  .map-btn .label { font-weight:600; font-size:14px; display:block; }
+  .map-btn .sub { font-size:12px; color:var(--text-muted); display:block; margin-top:1px; }
+  .map-btn .arrow { margin-left:auto; color:var(--blue); font-size:20px; }
+
+  /* ===== SECTIONS ===== */
+  .section-title { font-family:'DM Serif Display',serif; font-size:21px; color:var(--snow); margin-bottom:14px; }
+  .section-sub { font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.1em; font-weight:600; margin-bottom:6px; }
+
+  /* ===== DISTANCE GRID ===== */
+  .dist-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:28px; }
+  .dist-item { background:var(--card); border:1px solid var(--card-border); border-radius:14px; padding:14px; text-align:center; }
+  .dist-item .city { font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-dim); font-weight:600; margin-bottom:4px; }
+  .dist-item .km { font-family:'DM Serif Display',serif; font-size:24px; color:var(--snow); line-height:1; }
+  .dist-item .km span { font-size:13px; color:var(--text-dim); font-family:'DM Sans',sans-serif; }
+  .dist-item .time { font-size:12px; color:var(--text-muted); margin-top:3px; }
+
+  /* ===== ROUTE TABS ===== */
+  .route-tabs { display:flex; gap:8px; margin-bottom:18px; padding:4px; background:rgba(20,26,36,0.5); border-radius:12px; border:1px solid var(--card-border); }
+  .route-tab {
+    flex:1; padding:10px 8px; border:none; background:transparent; color:var(--text-muted);
+    font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600;
+    border-radius:10px; cursor:pointer; transition:all 0.3s; text-align:center;
+  }
+  .route-tab.active { background:var(--accent-soft); color:var(--accent); }
+  .route-tab .tab-dist { display:block; font-size:11px; font-weight:400; color:var(--text-dim); margin-top:2px; }
+  .route-tab.active .tab-dist { color:rgba(212,164,90,0.6); }
+
+  .route-content { display:none; }
+  .route-content.active { display:block; animation:fadeUp 0.35s ease; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ===== STEPS TIMELINE ===== */
+  .steps { position:relative; padding-left:28px; }
+  .steps::before { content:''; position:absolute; left:8px; top:20px; bottom:20px; width:2px; background:linear-gradient(180deg, var(--accent), var(--card-border)); border-radius:2px; }
+  .step { position:relative; margin-bottom:20px; }
+  .step:last-child { margin-bottom:0; }
+  .step-dot { position:absolute; left:-24px; top:6px; width:12px; height:12px; border-radius:50%; background:var(--bg); border:2px solid var(--accent); z-index:1; }
+  .step:last-child .step-dot { background:var(--accent); box-shadow:0 0 10px var(--accent-glow); }
+  .step-card { background:var(--card); border:1px solid var(--card-border); border-radius:13px; padding:14px 16px; backdrop-filter:blur(10px); }
+  .step-label { font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); font-weight:600; margin-bottom:3px; }
+  .step-text { font-size:14px; color:var(--text); line-height:1.5; }
+  .step-text strong { color:var(--snow); font-weight:600; }
+  .step-meta { display:flex; gap:10px; margin-top:8px; flex-wrap:wrap; }
+  .step-tag { display:inline-flex; align-items:center; gap:4px; font-size:11px; color:var(--text-muted); background:rgba(138,154,181,0.08); padding:3px 9px; border-radius:100px; }
+  .step-tag svg { width:11px; height:11px; }
+
+  /* ===== INFO CARDS ===== */
+  .info-card { background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); padding:18px; margin-bottom:16px; backdrop-filter:blur(10px); }
+  .info-card h3 { font-family:'DM Serif Display',serif; font-size:16px; color:var(--snow); margin-bottom:8px; display:flex; align-items:center; gap:9px; }
+  .info-card h3 .emoji { font-size:18px; }
+  .info-card p { font-size:13px; color:var(--text-muted); line-height:1.6; }
+  .info-card p + p { margin-top:6px; }
+  .info-card a { color:var(--blue); text-decoration:none; font-weight:500; }
+
+  /* ===== WINTER ALERT ===== */
+  .winter-alert {
+    background:linear-gradient(135deg, rgba(232,164,74,0.1), rgba(232,164,74,0.04));
+    border:1px solid rgba(232,164,74,0.2); border-radius:var(--radius);
+    padding:16px 18px; margin-bottom:16px; display:flex; gap:12px; align-items:flex-start;
+  }
+  .winter-alert .alert-icon { width:34px; height:34px; background:rgba(232,164,74,0.15); border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:16px; }
+  .winter-alert .alert-title { font-weight:700; font-size:13px; color:var(--warning); margin-bottom:3px; }
+  .winter-alert .alert-text { font-size:12px; color:var(--text-muted); line-height:1.5; }
+  .winter-alert a { color:var(--warning); text-decoration:none; font-weight:500; }
+
+  /* ===== SPACER ===== */
+  .spacer { height:24px; }
+
+  /* ===== FOOTER ===== */
+  .guide-footer { text-align:center; padding:32px 20px; border-top:1px solid var(--card-border); margin-top:32px; }
+  .guide-footer .brand { font-family:'DM Serif Display',serif; font-size:17px; color:var(--accent); margin-bottom:2px; }
+  .guide-footer p { font-size:12px; color:var(--text-dim); }
+
+  /* ===== FADE ===== */
+  .fade-in { opacity:0; transform:translateY(16px); transition:opacity 0.5s ease, transform 0.5s ease; }
+  .fade-in.visible { opacity:1; transform:translateY(0); }
+
+  /* ===== LANG HIDE/SHOW ===== */
+  [data-lang="en"] { display:none; }
+  body.en [data-lang="no"] { display:none; }
+  body.en [data-lang="en"] { display:block; }
+  /* For inline elements */
+  span[data-lang="en"], a[data-lang="en"] { display:none; }
+  body.en span[data-lang="no"], body.en a[data-lang="no"] { display:none; }
+  body.en span[data-lang="en"], body.en a[data-lang="en"] { display:inline; }
+  /* For flex elements like map-btn */
+  a.map-btn[data-lang="en"] { display:none; }
+  body.en a.map-btn[data-lang="no"] { display:none; }
+  body.en a.map-btn[data-lang="en"] { display:flex; }
+
+  ::-webkit-scrollbar { width:4px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar-thumb { background:var(--card-border); border-radius:4px; }
+
+  /* ===== TOP NAV ===== */
+  .top-nav {
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    background:rgba(10,13,19,0.95); border-bottom:1px solid rgba(60,75,95,0.3);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    display:flex; align-items:stretch; height:56px;
+  }
+  .nav-pages {
+    display:flex; flex:1; align-items:stretch;
+  }
+  .nav-item {
+    flex:1; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:3px; padding:6px 4px;
+    text-decoration:none; color:var(--text-dim); font-size:9px;
+    font-weight:600; letter-spacing:0.04em; text-transform:uppercase;
+    transition:color 0.2s; border:none; background:none; cursor:pointer;
+    font-family:'DM Sans',sans-serif;
+  }
+  .nav-item svg { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .nav-item.active { color:var(--accent); }
+  .nav-divider { width:1px; background:rgba(60,75,95,0.3); margin:10px 0; flex-shrink:0; }
+  .nav-lang {
+    display:flex; align-items:center; gap:2px; padding:0 10px; flex-shrink:0;
+  }
+  .lang-btn {
+    padding:6px 10px; border:none; background:transparent; color:var(--text-dim);
+    font-family:'DM Sans',sans-serif; font-size:11px; font-weight:700;
+    letter-spacing:0.05em; border-radius:7px; cursor:pointer; transition:all 0.2s;
+  }
+  .lang-btn.active { background:var(--accent-soft); color:var(--accent); }
+
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <div class="nav-pages">
+    <a class="nav-item " href="index.html">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Check-in</span>
+    </a>
+    <a class="nav-item active" href="skarsnuten-veibeskrivelse.html">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+      <span>Directions</span>
+    </a>
+    <a class="nav-item " href="skarsnuten-aktivitetsguide.html">
+      <svg viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 110-14h8.5M17.5 19l3-3-3-3M17.5 5l3 3-3 3"/></svg>
+      <span>Activities</span>
+    </a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-lang">
+    <button class="lang-btn active" onclick="setLang('no')">NO</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-stars" id="stars"></div>
+  <div class="hero-mountain">
+    <svg viewBox="0 0 800 300" preserveAspectRatio="none" fill="none">
+      <path d="M0 300 L0 180 L80 120 L160 160 L240 80 L320 140 L400 60 L480 110 L560 70 L640 130 L720 90 L800 150 L800 300Z" fill="rgba(20,26,36,0.6)"/>
+      <path d="M0 300 L0 220 L100 170 L200 200 L300 140 L400 190 L500 130 L600 180 L700 150 L800 200 L800 300Z" fill="rgba(12,15,20,0.8)"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span data-lang="no">Veibeskrivelse</span>
+      <span data-lang="en">Directions</span>
+    </div>
+    <h1>
+      <span data-lang="no">Hvordan komme seg til Skarsnuten&nbsp;905</span>
+      <span data-lang="en">How to get to Skarsnuten&nbsp;905</span>
+    </h1>
+    <p>
+      <span data-lang="no">Alt du trenger for en smidig reise til Hemsedal</span>
+      <span data-lang="en">Everything you need for a smooth trip to Hemsedal</span>
+    </p>
+  </div>
+</header>
+
+<!-- ===== MAIN ===== -->
+<main class="main">
+
+  <!-- MAP BUTTON -->
+  <a class="map-btn fade-in" data-lang="no" href="https://www.google.com/maps/place/Nedre+Storelie+6,+3560+Hemsedal/@60.858485,8.4925206,17z" target="_blank" rel="noopener">
+    <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#5b9bd5" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+    <div><span class="label">Åpne i Google Maps</span><span class="sub">Nedre Storelie 6, 3560 Hemsedal</span></div>
+    <span class="arrow">›</span>
+  </a>
+  <a class="map-btn fade-in" data-lang="en" href="https://www.google.com/maps/place/Nedre+Storelie+6,+3560+Hemsedal/@60.858485,8.4925206,17z" target="_blank" rel="noopener">
+    <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#5b9bd5" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+    <div><span class="label">Open in Google Maps</span><span class="sub">Nedre Storelie 6, 3560 Hemsedal</span></div>
+    <span class="arrow">›</span>
+  </a>
+
+  <!-- DISTANCES -->
+  <div data-lang="no"><div class="section-sub fade-in">Avstand fra</div><div class="section-title fade-in">Kjøretider</div></div>
+  <div data-lang="en"><div class="section-sub fade-in">Distance from</div><div class="section-title fade-in">Drive times</div></div>
+
+  <div class="dist-grid fade-in">
+    <div class="dist-item">
+      <div class="city">Oslo</div>
+      <div class="km">200 <span>km</span></div>
+      <div class="time">ca. 3 <span data-lang="no">t</span><span data-lang="en">hrs</span></div>
+    </div>
+    <div class="dist-item">
+      <div class="city">Bergen</div>
+      <div class="km">280 <span>km</span></div>
+      <div class="time">ca. 4 <span data-lang="no">t</span><span data-lang="en">hrs</span></div>
+    </div>
+    <div class="dist-item">
+      <div class="city">Gardermoen</div>
+      <div class="km">210 <span>km</span></div>
+      <div class="time">ca. 3 <span data-lang="no">t</span><span data-lang="en">hrs</span></div>
+    </div>
+    <div class="dist-item">
+      <div class="city">Stavanger</div>
+      <div class="km">430 <span>km</span></div>
+      <div class="time">ca. 6 <span data-lang="no">t</span><span data-lang="en">hrs</span></div>
+    </div>
+  </div>
+
+  <!-- ROUTE TABS + CONTENT -->
+  <div data-lang="no"><div class="section-sub fade-in">Velg rute</div><div class="section-title fade-in">Kjørebeskrivelse</div></div>
+  <div data-lang="en"><div class="section-sub fade-in">Choose route</div><div class="section-title fade-in">Driving directions</div></div>
+
+  <div class="route-tabs fade-in">
+    <button class="route-tab active" onclick="switchRoute('oslo')">
+      <span data-lang="no">Fra Oslo</span><span data-lang="en">From Oslo</span>
+      <span class="tab-dist">3 <span data-lang="no">timer</span><span data-lang="en">hours</span></span>
+    </button>
+    <button class="route-tab" onclick="switchRoute('bergen')">
+      <span data-lang="no">Fra Bergen</span><span data-lang="en">From Bergen</span>
+      <span class="tab-dist">4 <span data-lang="no">timer</span><span data-lang="en">hours</span></span>
+    </button>
+  </div>
+
+  <!-- OSLO - NO -->
+  <div class="route-content active" id="route-oslo" data-lang="no">
+    <div class="steps">
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Start</div>
+        <div class="step-text">Følg <strong>E16 mot Hønefoss</strong>, videre mot Gol.</div>
+        <div class="step-meta"><span class="step-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>ca. 2,5 t</span></div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Gol</div>
+        <div class="step-text">Ta av på <strong>Rv52 mot Hemsedal</strong>. Følg skilting.</div>
+        <div class="step-meta"><span class="step-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>30 min</span></div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Hemsedal sentrum</div>
+        <div class="step-text">Kjør gjennom sentrum, fortsett <strong>ca. 2 km på Rv52</strong> mot vest. Ta av <strong>til venstre over broen</strong> mot skisenteret.</div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Skisenteret</div>
+        <div class="step-text">Ta <strong>første til høyre</strong> etter broen. Følg skilting mot Skigaarden, Skarsnuten og Holdeskaret.</div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Bommen</div>
+        <div class="step-text">Etter ca. 600 m: <strong>automatisk digital bom</strong> (kr 70). Du får kode for fri passering i velkomstmeldingen.</div>
+        <div class="step-meta"><span class="step-tag" style="color:var(--warning)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Se bominfo</span></div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Siste strekning</div>
+        <div class="step-text">Kjør <strong>ca. 3 km oppover</strong>. Ta til høyre ved skilt <strong>«Skarsnuten Panorama»</strong>. Deretter første til høyre ned bakken.</div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card" style="border-color:rgba(212,164,90,0.3);background:linear-gradient(135deg,rgba(212,164,90,0.06),var(--card))">
+        <div class="step-label" style="color:var(--accent)">Fremme!</div>
+        <div class="step-text"><strong>Velkommen til Skarsnuten 905!</strong> Kjør inn i garasjen. Smart-låskode finner du i velkomstmeldingen.</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- OSLO - EN -->
+  <div class="route-content" id="route-oslo-en" data-lang="en">
+    <div class="steps">
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Start</div>
+        <div class="step-text">Follow <strong>E16 towards Hønefoss</strong>, then continue towards Gol.</div>
+        <div class="step-meta"><span class="step-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>~2.5 hrs</span></div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Gol</div>
+        <div class="step-text">Turn onto <strong>Rv52 towards Hemsedal</strong>. Follow signs.</div>
+        <div class="step-meta"><span class="step-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>30 min</span></div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Hemsedal centre</div>
+        <div class="step-text">Drive through town, continue <strong>~2 km on Rv52</strong> west. Turn <strong>left across the bridge</strong> towards the ski centre.</div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Ski centre</div>
+        <div class="step-text">Take the <strong>first right</strong> after the bridge. Follow signs for Skigaarden, Skarsnuten and Holdeskaret.</div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Toll gate</div>
+        <div class="step-text">After ~600 m: <strong>automatic digital toll gate</strong> (NOK 70). You'll receive a code for free passage in the welcome message.</div>
+        <div class="step-meta"><span class="step-tag" style="color:var(--warning)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>See toll info</span></div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Final stretch</div>
+        <div class="step-text">Drive <strong>~3 km uphill</strong>. Turn right at the <strong>"Skarsnuten Panorama"</strong> sign. Then first right down the slope.</div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card" style="border-color:rgba(212,164,90,0.3);background:linear-gradient(135deg,rgba(212,164,90,0.06),var(--card))">
+        <div class="step-label" style="color:var(--accent)">You've arrived!</div>
+        <div class="step-text"><strong>Welcome to Skarsnuten 905!</strong> Drive into the garage. Smart lock code is in your welcome message.</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- BERGEN - NO -->
+  <div class="route-content" id="route-bergen" data-lang="no">
+    <div class="steps">
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Start</div>
+        <div class="step-text">Følg <strong>E16 fra Bergen mot Lærdal</strong>, ca. 230 km.</div>
+        <div class="step-meta"><span class="step-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>ca. 3 t</span></div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Borlaug</div>
+        <div class="step-text">Ta av mot <strong>Hemsedal på Rv52</strong>. Ca. 50 km over Hemsedalsfjellet.</div>
+        <div class="step-meta"><span class="step-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>ca. 50 min</span></div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Hemsedal Skisenter</div>
+        <div class="step-text">Ta av <strong>til venstre over broen</strong> mot skisenteret. Første til høyre, følg skilting mot <strong>Skarsnuten</strong>.</div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Bom + siste strekk</div>
+        <div class="step-text">Passér <strong>digital bom</strong> (du får kode). Kjør 3 km opp, ta til høyre ved <strong>«Skarsnuten Panorama»</strong>, første til høyre.</div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card" style="border-color:rgba(212,164,90,0.3);background:linear-gradient(135deg,rgba(212,164,90,0.06),var(--card))">
+        <div class="step-label" style="color:var(--accent)">Fremme!</div>
+        <div class="step-text"><strong>Velkommen til Skarsnuten 905!</strong> Kjør inn i garasjen.</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- BERGEN - EN -->
+  <div class="route-content" id="route-bergen-en" data-lang="en">
+    <div class="steps">
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Start</div>
+        <div class="step-text">Follow <strong>E16 from Bergen towards Lærdal</strong>, ~230 km.</div>
+        <div class="step-meta"><span class="step-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>~3 hrs</span></div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Borlaug</div>
+        <div class="step-text">Turn off towards <strong>Hemsedal on Rv52</strong>. ~50 km across the Hemsedal mountain pass.</div>
+        <div class="step-meta"><span class="step-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>~50 min</span></div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Hemsedal Ski Centre</div>
+        <div class="step-text">Turn <strong>left across the bridge</strong> towards the ski centre. First right, follow signs for <strong>Skarsnuten</strong>.</div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card">
+        <div class="step-label">Toll gate + final stretch</div>
+        <div class="step-text">Pass the <strong>digital toll gate</strong> (code provided). Drive 3 km uphill, turn right at <strong>"Skarsnuten Panorama"</strong>, then first right.</div>
+      </div></div>
+      <div class="step"><div class="step-dot"></div><div class="step-card" style="border-color:rgba(212,164,90,0.3);background:linear-gradient(135deg,rgba(212,164,90,0.06),var(--card))">
+        <div class="step-label" style="color:var(--accent)">You've arrived!</div>
+        <div class="step-text"><strong>Welcome to Skarsnuten 905!</strong> Drive into the garage.</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- BOM INFO -->
+  <div class="spacer"></div>
+  <div data-lang="no"><div class="section-sub fade-in">Viktig</div><div class="section-title fade-in">Bommen til Skarsnuten</div></div>
+  <div data-lang="en"><div class="section-sub fade-in">Important</div><div class="section-title fade-in">The Skarsnuten toll gate</div></div>
+
+  <div class="info-card fade-in" data-lang="no">
+    <h3><span class="emoji">🚧</span> Automatisk digital bom</h3>
+    <p>Veien opp til Skarsnuten har en automatisk bom som registrerer bilnummeret. Prisen er <strong style="color:var(--snow)">kr 70 per passering</strong>.</p>
+    <p>Som vår gjest får du en <strong style="color:var(--accent)">kode for fri passering</strong> i velkomstmeldingen.</p>
+    <p>Registrer koden på <a href="https://youpark.no" target="_blank">youpark.no</a> – søk opp «Holdeskarvegen» og legg inn bilnummeret. Gjør det innen 48 timer.</p>
+  </div>
+  <div class="info-card fade-in" data-lang="en">
+    <h3><span class="emoji">🚧</span> Automatic digital toll gate</h3>
+    <p>The road to Skarsnuten has an automatic toll gate that reads your number plate. The fee is <strong style="color:var(--snow)">NOK 70 per passage</strong>.</p>
+    <p>As our guest you'll receive a <strong style="color:var(--accent)">code for free passage</strong> in the welcome message.</p>
+    <p>Register the code at <a href="https://youpark.no" target="_blank">youpark.no</a> – search for "Holdeskarvegen" and enter your number plate. Do this within 48 hours.</p>
+  </div>
+
+  <!-- WINTER ALERT -->
+  <div class="winter-alert fade-in" data-lang="no">
+    <div class="alert-icon">❄️</div>
+    <div><div class="alert-title">Vinterkjøring</div><div class="alert-text">Veien over Hemsedalsfjellet (Rv52) kan være utsatt for vind og snø om vinteren. Sjekk <a href="https://www.vegvesen.no" target="_blank">vegvesen.no</a> før avreise. Veien opp til Skarsnuten er bratt – vinterdekk er påkrevd.</div></div>
+  </div>
+  <div class="winter-alert fade-in" data-lang="en">
+    <div class="alert-icon">❄️</div>
+    <div><div class="alert-title">Winter driving</div><div class="alert-text">The Hemsedal mountain pass (Rv52) may be affected by wind and snow in winter. Check <a href="https://www.vegvesen.no" target="_blank">vegvesen.no</a> before departure. The road to Skarsnuten is steep – winter tyres are required.</div></div>
+  </div>
+
+  <!-- EV CHARGING -->
+  <div class="info-card fade-in" data-lang="no">
+    <h3><span class="emoji">⚡</span> Elbil-lading</h3>
+    <p>Leiligheten har <strong style="color:var(--snow)">privat lader i garasjen</strong> (Type 2). Lad bilen mens du sover – perfekt etter en lang kjøretur.</p>
+  </div>
+  <div class="info-card fade-in" data-lang="en">
+    <h3><span class="emoji">⚡</span> EV charging</h3>
+    <p>The apartment has a <strong style="color:var(--snow)">private charger in the garage</strong> (Type 2 connector). Charge overnight – perfect after a long drive.</p>
+  </div>
+
+  <!-- PUBLIC TRANSPORT -->
+  <div class="spacer"></div>
+  <div data-lang="no"><div class="section-sub fade-in">Alternativt</div><div class="section-title fade-in">Uten bil?</div></div>
+  <div data-lang="en"><div class="section-sub fade-in">Alternative</div><div class="section-title fade-in">No car?</div></div>
+
+  <div class="info-card fade-in" data-lang="no">
+    <h3><span class="emoji">🚌</span> Buss til Hemsedal</h3>
+    <p><strong style="color:var(--snow)">Vy-buss (VY170)</strong> går fra Oslo Bussterminal til Hemsedal sentrum, ca. 3,5 timer. Fra sentrum til Skarsnuten er det ca. 5 km – bruk taxi eller gratis skibuss (vintersesong).</p>
+    <p>Sjekk rutetider på <a href="https://www.vy.no" target="_blank">vy.no</a></p>
+  </div>
+  <div class="info-card fade-in" data-lang="en">
+    <h3><span class="emoji">🚌</span> Bus to Hemsedal</h3>
+    <p><strong style="color:var(--snow)">Vy bus (VY170)</strong> runs from Oslo Bus Terminal to Hemsedal centre, ~3.5 hours. From the centre to Skarsnuten is ~5 km – use a taxi or the free ski bus (winter season).</p>
+    <p>Check timetables at <a href="https://www.vy.no" target="_blank">vy.no</a></p>
+  </div>
+
+  <div class="info-card fade-in" data-lang="no">
+    <h3><span class="emoji">✈️</span> Fly + leiebil</h3>
+    <p><strong style="color:var(--snow)">Fagernes lufthavn</strong> (80 km) er nærmest, med fly fra Bergen. Oslo Gardermoen (210 km) har bredere utvalg. Leiebil anbefales.</p>
+  </div>
+  <div class="info-card fade-in" data-lang="en">
+    <h3><span class="emoji">✈️</span> Fly + rental car</h3>
+    <p><strong style="color:var(--snow)">Fagernes airport</strong> (80 km) is closest, with flights from Bergen. Oslo Gardermoen (210 km) has more options. A rental car is recommended.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="guide-footer">
+    <div class="brand">Skarsnuten 905</div>
+    <p>Hemsedal – 1000 moh</p>
+  </footer>
+
+</main>
+
+<script>
+  // Language switching
+  let currentLang = 'no';
+  let currentRoute = 'oslo';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.body.classList.toggle('en', lang === 'en');
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+    // Re-apply active route for new language
+    showRoute();
+  }
+
+  function switchRoute(route) {
+    currentRoute = route;
+    document.querySelectorAll('.route-tab').forEach(t => t.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+    showRoute();
+  }
+
+  function showRoute() {
+    document.querySelectorAll('.route-content').forEach(c => c.classList.remove('active'));
+    const suffix = currentLang === 'en' ? '-en' : '';
+    const el = document.getElementById('route-' + currentRoute + suffix);
+    if (el) el.classList.add('active');
+  }
+
+  // Stars
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 30; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random()*100+'%';
+    s.style.top = Math.random()*100+'%';
+    s.style.animationDelay = Math.random()*3+'s';
+    s.style.width = s.style.height = (Math.random()*2+1)+'px';
+    starsEl.appendChild(s);
+  }
+
+  // Fade in observer
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e,i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i*50); obs.unobserve(e.target); }
+    });
+  }, {threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+
+
+
+
+</body>
+</html>

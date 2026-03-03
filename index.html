@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Nedre Storelie 6 – Velkomstguide / Welcome Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0f14;
+    --card: rgba(20,26,36,0.7);
+    --card-border: rgba(60,75,95,0.25);
+    --accent: #d4a45a;
+    --accent-soft: rgba(212,164,90,0.12);
+    --accent-glow: rgba(212,164,90,0.25);
+    --text: #e8e4df;
+    --text-muted: #8a9ab5;
+    --text-dim: #5a6a82;
+    --snow: #f0ece6;
+    --success: #6ec89b;
+    --warning: #e8a44a;
+    --blue: #5b9bd5;
+    --radius: 16px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh; overflow-x:hidden; }
+
+
+
+  /* ===== HERO ===== */
+  .hero {
+    position:relative; height:32vh; min-height:220px; max-height:280px; margin-top:56px;
+    overflow:hidden; display:flex; align-items:flex-end;
+  }
+  .hero-bg {
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, transparent 20%, var(--bg) 100%), linear-gradient(135deg, #1a2a3a 0%, #0d1520 50%, #1a1510 100%);
+    z-index:1;
+  }
+  .hero-mountain { position:absolute; bottom:0; left:0; right:0; height:60%; z-index:0; }
+  .hero-mountain svg { width:100%; height:100%; display:block; }
+  .hero-stars { position:absolute; top:0; left:0; right:0; height:50%; z-index:0; }
+  .star { position:absolute; width:2px; height:2px; background:var(--snow); border-radius:50%; animation:twinkle 3s ease-in-out infinite; }
+  @keyframes twinkle { 0%,100%{opacity:0.2} 50%{opacity:0.9} }
+  .hero-content { position:relative; z-index:2; padding:0 24px 28px; width:100%; }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:6px;
+    background:var(--accent-soft); border:1px solid rgba(212,164,90,0.2);
+    border-radius:100px; padding:5px 12px; font-size:10px; font-weight:600;
+    letter-spacing:0.08em; text-transform:uppercase; color:var(--accent);
+    margin-bottom:12px; backdrop-filter:blur(10px);
+  }
+  .hero-badge svg { width:12px; height:12px; }
+  .hero h1 { font-family:'DM Serif Display',serif; font-size:28px; font-weight:400; line-height:1.15; color:var(--snow); margin-bottom:6px; }
+  .hero p { color:var(--text-muted); font-size:14px; }
+
+  /* ===== MAIN ===== */
+  .main { padding:0 20px 60px; max-width:480px; margin:0 auto; }
+
+  /* ===== SECTION ===== */
+  .section-sub { font-size:10px; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent); font-weight:700; margin-bottom:4px; margin-top:28px; }
+  .section-title { font-family:'DM Serif Display',serif; font-size:21px; color:var(--snow); margin-bottom:14px; }
+
+  /* ===== INFO CARD ===== */
+  .info-card {
+    background:var(--card); border:1px solid var(--card-border);
+    border-radius:var(--radius); padding:18px; margin-bottom:14px;
+    backdrop-filter:blur(10px);
+  }
+  .info-card h3 {
+    font-family:'DM Serif Display',serif; font-size:16px; color:var(--snow);
+    margin-bottom:8px; display:flex; align-items:center; gap:9px;
+  }
+  .info-card p { font-size:13.5px; color:var(--text-muted); line-height:1.65; }
+  .info-card p + p { margin-top:6px; }
+  .info-card a { color:var(--blue); text-decoration:none; font-weight:500; }
+
+  /* ===== CODE BOX ===== */
+  .code-box {
+    background:rgba(212,164,90,0.08); border:1px solid rgba(212,164,90,0.25);
+    border-radius:12px; padding:14px 18px; margin:10px 0;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .code-label { font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); font-weight:700; }
+  .code-value { font-family:monospace; font-size:22px; color:var(--accent); font-weight:700; letter-spacing:0.05em; }
+  .code-hint { font-size:11px; color:var(--text-dim); margin-top:3px; }
+  .copy-btn {
+    background:rgba(212,164,90,0.15); border:1px solid rgba(212,164,90,0.2);
+    color:var(--accent); padding:7px 13px; border-radius:8px; font-size:12px;
+    font-weight:600; cursor:pointer; border:none; font-family:'DM Sans',sans-serif;
+    transition:all 0.2s;
+  }
+  .copy-btn:active { background:rgba(212,164,90,0.3); transform:scale(0.96); }
+
+  /* ===== STEP LIST ===== */
+  .steps { display:flex; flex-direction:column; gap:0; position:relative; }
+  .step { display:grid; grid-template-columns:28px 1fr; gap:0 14px; }
+  .step-line { display:flex; flex-direction:column; align-items:center; }
+  .step-dot { width:12px; height:12px; border-radius:50%; background:var(--accent-soft); border:2px solid var(--accent); flex-shrink:0; margin-top:4px; z-index:1; }
+  .step-connector { width:2px; background:var(--card-border); flex:1; margin:4px 0; }
+  .step:last-child .step-connector { display:none; }
+  .step:last-child .step-dot { background:var(--accent); box-shadow:0 0 10px var(--accent-glow); }
+  .step-card { background:var(--card); border:1px solid var(--card-border); border-radius:13px; padding:13px 15px; margin-bottom:10px; backdrop-filter:blur(10px); }
+  .step-label { font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); font-weight:600; margin-bottom:3px; }
+  .step-text { font-size:14px; color:var(--text); line-height:1.5; }
+  .step-text strong { color:var(--snow); font-weight:600; }
+
+  /* ===== HIGHLIGHT ===== */
+  .highlight-card {
+    background:linear-gradient(135deg, rgba(110,200,155,0.1), rgba(110,200,155,0.04));
+    border:1px solid rgba(110,200,155,0.2); border-radius:var(--radius);
+    padding:16px 18px; margin-bottom:14px;
+    display:flex; gap:12px; align-items:flex-start;
+  }
+  .highlight-card .icon { width:36px; height:36px; background:rgba(110,200,155,0.15); border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:17px; }
+  .highlight-card .hc-title { font-weight:700; font-size:13px; color:var(--success); margin-bottom:3px; }
+  .highlight-card .hc-text { font-size:12.5px; color:var(--text-muted); line-height:1.5; }
+
+  .warn-card {
+    background:linear-gradient(135deg, rgba(232,164,74,0.1), rgba(232,164,74,0.04));
+    border:1px solid rgba(232,164,74,0.2); border-radius:var(--radius);
+    padding:16px 18px; margin-bottom:14px;
+    display:flex; gap:12px; align-items:flex-start;
+  }
+  .warn-card .icon { width:36px; height:36px; background:rgba(232,164,74,0.15); border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:17px; }
+  .warn-card .wc-title { font-weight:700; font-size:13px; color:var(--warning); margin-bottom:3px; }
+  .warn-card .wc-text { font-size:12.5px; color:var(--text-muted); line-height:1.5; }
+
+  /* ===== FADE IN ===== */
+  .fade-in { opacity:0; transform:translateY(16px); transition:opacity 0.5s ease, transform 0.5s ease; }
+  .fade-in.visible { opacity:1; transform:translateY(0); }
+
+  /* ===== LANG DISPLAY ===== */
+  .lang-no, .lang-en { display:none; }
+  body.no .lang-no { display:block; }
+  body.en .lang-en { display:block; }
+  .inline-no, .inline-en { display:none; }
+  body.no .inline-no { display:inline; }
+  body.en .inline-en { display:inline; }
+
+  /* ===== DIVIDER ===== */
+  .divider { height:1px; background:var(--card-border); margin:24px 0; }
+
+  /* ===== QUICK GRID ===== */
+  .quick-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; }
+  .quick-item {
+    background:var(--card); border:1px solid var(--card-border);
+    border-radius:13px; padding:14px 14px; backdrop-filter:blur(10px);
+    text-align:center;
+  }
+  .quick-item .qi-icon { font-size:22px; margin-bottom:6px; }
+  .quick-item .qi-label { font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.07em; font-weight:600; }
+  .quick-item .qi-value { font-size:13px; color:var(--snow); font-weight:600; margin-top:2px; }
+
+  /* ===== TOP NAV ===== */
+  .top-nav {
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    background:rgba(10,13,19,0.95); border-bottom:1px solid rgba(60,75,95,0.3);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    display:flex; align-items:stretch; height:56px;
+  }
+  .nav-pages {
+    display:flex; flex:1; align-items:stretch;
+  }
+  .nav-item {
+    flex:1; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:3px; padding:6px 4px;
+    text-decoration:none; color:var(--text-dim); font-size:9px;
+    font-weight:600; letter-spacing:0.04em; text-transform:uppercase;
+    transition:color 0.2s; border:none; background:none; cursor:pointer;
+    font-family:'DM Sans',sans-serif;
+  }
+  .nav-item svg { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .nav-item.active { color:var(--accent); }
+  .nav-divider { width:1px; background:rgba(60,75,95,0.3); margin:10px 0; flex-shrink:0; }
+  .nav-lang {
+    display:flex; align-items:center; gap:2px; padding:0 10px; flex-shrink:0;
+  }
+  .lang-btn {
+    padding:6px 10px; border:none; background:transparent; color:var(--text-dim);
+    font-family:'DM Sans',sans-serif; font-size:11px; font-weight:700;
+    letter-spacing:0.05em; border-radius:7px; cursor:pointer; transition:all 0.2s;
+  }
+  .lang-btn.active { background:var(--accent-soft); color:var(--accent); }
+
+  /* ===== COPY ALL BOX ===== */
+  .copy-all-box {
+    background:rgba(91,155,213,0.08); border:1px solid rgba(91,155,213,0.2);
+    border-radius:var(--radius); padding:16px 18px; margin-bottom:14px;
+  }
+  .copy-all-header {
+    display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;
+  }
+  .copy-all-title { font-size:12px; font-weight:700; color:var(--snow); text-transform:uppercase; letter-spacing:0.06em; }
+  .copy-all-btn {
+    background:rgba(91,155,213,0.15); border:1px solid rgba(91,155,213,0.25);
+    color:var(--blue); padding:8px 16px; border-radius:9px; font-size:12px;
+    font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif;
+    transition:all 0.2s; display:flex; align-items:center; gap:6px;
+  }
+  .copy-all-btn:active { transform:scale(0.96); }
+  .copy-all-preview {
+    font-family:monospace; font-size:11.5px; color:var(--text-muted);
+    line-height:1.8; white-space:pre; background:rgba(0,0,0,0.2);
+    border-radius:8px; padding:10px 12px;
+  }
+
+</style>
+</head>
+<body class="no">
+
+<nav class="top-nav">
+  <div class="nav-pages">
+    <a class="nav-item active" href="index.html">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Check-in</span>
+    </a>
+    <a class="nav-item" href="skarsnuten-veibeskrivelse.html">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+      <span>Directions</span>
+    </a>
+    <a class="nav-item" href="skarsnuten-aktivitetsguide.html">
+      <svg viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 110-14h8.5M17.5 19l3-3-3-3M17.5 5l3 3-3 3"/></svg>
+      <span>Activities</span>
+    </a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-lang">
+    <button class="lang-btn active" onclick="setLang('no')">NO</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-stars" id="stars"></div>
+  <div class="hero-mountain">
+    <svg viewBox="0 0 400 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="0,120 80,40 140,75 200,20 260,65 320,30 400,80 400,120" fill="#141e2e" opacity="0.6"/>
+      <polygon points="0,120 60,60 120,90 180,35 240,70 300,45 360,65 400,90 400,120" fill="#1a2a3a" opacity="0.5"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span class="inline-no">Velkomstguide</span><span class="inline-en">Welcome Guide</span>
+    </div>
+    <h1 class="lang-no">Nedre Storelie 6<br>Hemsedal</h1>
+    <h1 class="lang-en">Nedre Storelie 6<br>Hemsedal</h1>
+    <p class="lang-no">Leilighet H0101 · Innsjekk, koder og praktisk info</p>
+    <p class="lang-en">Apartment H0101 · Check-in, codes &amp; practical info</p>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- QUICK FACTS -->
+  <div class="section-sub lang-no fade-in">Oversikt</div>
+  <div class="section-sub lang-en fade-in">Overview</div>
+  <div class="section-title lang-no fade-in">Din leilighet</div>
+  <div class="section-title lang-en fade-in">Your apartment</div>
+
+  <div class="quick-grid fade-in">
+    <div class="quick-item">
+      <div class="qi-icon">🏠</div>
+      <div class="qi-label lang-no">Leilighet</div>
+      <div class="qi-label lang-en">Apartment</div>
+      <div class="qi-value">H0101</div>
+    </div>
+    <div class="quick-item">
+      <div class="qi-icon">📍</div>
+      <div class="qi-label lang-no">Adresse</div>
+      <div class="qi-label lang-en">Address</div>
+      <div class="qi-value">Nedre Storelie 6</div>
+    </div>
+    <div class="quick-item">
+      <div class="qi-icon">🕐</div>
+      <div class="qi-label lang-no">Innsjekk</div>
+      <div class="qi-label lang-en">Check-in</div>
+      <div class="qi-value">16:00</div>
+    </div>
+    <div class="quick-item">
+      <div class="qi-icon">🕙</div>
+      <div class="qi-label lang-no">Utsjekk</div>
+      <div class="qi-label lang-en">Check-out</div>
+      <div class="qi-value">11:00</div>
+    </div>
+  </div>
+
+  <!-- NAVIGASJON TIP -->
+  <div class="warn-card fade-in">
+    <div class="icon">🗺️</div>
+    <div>
+      <div class="wc-title lang-no">Veibeskrivelse</div>
+      <div class="wc-title lang-en">Directions</div>
+      <div class="wc-text lang-no">Vi har laget en egen detaljert veibeskrivelse med kjøreruter, elbil-info og tips. <a href="skarsnuten-veibeskrivelse.html" style="color:var(--warning); font-weight:600;">→ Åpne veibeskrivelse</a></div>
+      <div class="wc-text lang-en">We've made a detailed directions guide with driving routes, EV info and tips. <a href="skarsnuten-veibeskrivelse.html" style="color:var(--warning); font-weight:600;">→ Open directions guide</a></div>
+    </div>
+  </div>
+
+  <!-- INNSJEKK -->
+  <div class="section-sub lang-no fade-in">Steg for steg</div>
+  <div class="section-sub lang-en fade-in">Step by step</div>
+  <div class="section-title lang-no fade-in">Innsjekk</div>
+  <div class="section-title lang-en fade-in">Check-in</div>
+
+  <div class="steps">
+    <!-- Step 1 -->
+    <div class="step fade-in">
+      <div class="step-line"><div class="step-dot"></div><div class="step-connector"></div></div>
+      <div class="step-card">
+        <div class="step-label lang-no">Steg 1 · Inngangsdør bygg</div>
+        <div class="step-label lang-en">Step 1 · Building entrance</div>
+        <div class="step-text lang-no">Tast <strong>133700#</strong> på tastaturet ved inngangsdøren.</div>
+        <div class="step-text lang-en">Enter <strong>133700#</strong> on the keypad at the building entrance.</div>
+      </div>
+    </div>
+    <!-- Step 2 -->
+    <div class="step fade-in">
+      <div class="step-line"><div class="step-dot"></div><div class="step-connector"></div></div>
+      <div class="step-card">
+        <div class="step-label lang-no">Steg 2 · Heis / trapp</div>
+        <div class="step-label lang-en">Step 2 · Elevator / stairs</div>
+        <div class="step-text lang-no">Leiligheten ligger <strong>én etasje opp</strong>, til venstre når du går opp trappen eller ut av heisen.</div>
+        <div class="step-text lang-en">The apartment is <strong>one floor up</strong>, to the left when you walk up the stairs or step out of the elevator.</div>
+      </div>
+    </div>
+    <!-- Step 3 -->
+    <div class="step fade-in">
+      <div class="step-line"><div class="step-dot"></div><div class="step-connector"></div></div>
+      <div class="step-card">
+        <div class="step-label lang-no">Steg 3 · Leilighetsdør</div>
+        <div class="step-label lang-en">Step 3 · Apartment door</div>
+        <div class="step-text lang-no">Åpne: <strong>*112255*</strong> &nbsp;·&nbsp; Lukke: <strong>*</strong></div>
+        <div class="step-text lang-en">Open: <strong>*112255*</strong> &nbsp;·&nbsp; Lock: <strong>*</strong></div>
+      </div>
+    </div>
+    <!-- Step 4 -->
+    <div class="step fade-in">
+      <div class="step-line"><div class="step-dot"></div><div class="step-connector"></div></div>
+      <div class="step-card">
+        <div class="step-label lang-no">Steg 4 · Garasje (valgfritt)</div>
+        <div class="step-label lang-en">Step 4 · Garage (optional)</div>
+        <div class="step-text lang-no"><strong>Lengst til venstre</strong> i garasjeanlegget. Åpne/lukke: <strong>133700 + 🔑</strong></div>
+        <div class="step-text lang-en"><strong>Far left</strong> in the garage. Open/close: <strong>133700 + 🔑</strong></div>
+      </div>
+    </div>
+    <!-- Step 5 -->
+    <div class="step fade-in">
+      <div class="step-line"><div class="step-dot"></div><div class="step-connector"></div></div>
+      <div class="step-card">
+        <div class="step-label lang-no">Steg 5 · Velkommen inn!</div>
+        <div class="step-label lang-en">Step 5 · Welcome in!</div>
+        <div class="step-text lang-no">Du er fremme. Nyt oppholdet! ✨</div>
+        <div class="step-text lang-en">You're in. Enjoy your stay! ✨</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KODER -->
+  <div class="section-sub lang-no fade-in">Adgangskoder</div>
+  <div class="section-sub lang-en fade-in">Access codes</div>
+  <div class="section-title lang-no fade-in">Koder</div>
+  <div class="section-title lang-en fade-in">Codes</div>
+
+  <!-- COPY ALL -->
+  <div class="copy-all-box fade-in">
+    <div class="copy-all-header">
+      <div>
+        <div class="copy-all-title lang-no">📋 Del alle koder</div>
+        <div class="copy-all-title lang-en">📋 Share all codes</div>
+      </div>
+      <button class="copy-all-btn" onclick="copyAll(this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        <span class="lang-no">Kopier alt</span><span class="lang-en">Copy all</span>
+      </button>
+    </div>
+    <div class="copy-all-preview lang-no">Nedre Storelie 6 – Leilighet H0101
+Inngang bygg:  133700#
+Leilighet:     *112255* (lukke: *)
+Garasje:       133700 + 🔑 (lengst til venstre)
+WiFi:          Skjelde / Hemsedal</div>
+    <div class="copy-all-preview lang-en">Nedre Storelie 6 – Apartment H0101
+Building:      133700#
+Apartment:     *112255* (lock: *)
+Garage:        133700 + 🔑 (far left)
+WiFi:          Skjelde / Hemsedal</div>
+  </div>
+
+  <div class="fade-in">
+    <div class="code-box">
+      <div>
+        <div class="code-label lang-no">Inngangsdør bygg</div>
+        <div class="code-label lang-en">Building entrance</div>
+        <div class="code-value">133700#</div>
+      </div>
+      <button class="copy-btn" onclick="copyCode('133700', this)">Kopier</button>
+    </div>
+
+    <div class="code-box">
+      <div>
+        <div class="code-label lang-no">Leilighet – åpne</div>
+        <div class="code-label lang-en">Apartment – open</div>
+        <div class="code-value">*112255*</div>
+        <div class="code-hint lang-no">Lukke: bare trykk *</div>
+        <div class="code-hint lang-en">Lock: just press *</div>
+      </div>
+      <button class="copy-btn" onclick="copyCode('112255', this)">Kopier</button>
+    </div>
+
+    <div class="code-box">
+      <div>
+        <div class="code-label lang-no">Garasje (lengst til venstre)</div>
+        <div class="code-label lang-en">Garage (far left)</div>
+        <div class="code-value">133700 🔑</div>
+        <div class="code-hint lang-no">Åpne og lukke</div>
+        <div class="code-hint lang-en">Open and close</div>
+      </div>
+      <button class="copy-btn" onclick="copyCode('133700', this)">Kopier</button>
+    </div>
+  </div>
+
+  <!-- WIFI -->
+  <div class="section-sub lang-no fade-in">Internett</div>
+  <div class="section-sub lang-en fade-in">Internet</div>
+  <div class="section-title lang-no fade-in">WiFi</div>
+  <div class="section-title lang-en fade-in">WiFi</div>
+
+  <div class="info-card fade-in">
+    <h3>📶 <span class="lang-no">Trådløst nettverk</span><span class="lang-en">Wireless network</span></h3>
+    <div class="code-box" style="margin-top:0">
+      <div>
+        <div class="code-label lang-no">Nettverksnavn</div>
+        <div class="code-label lang-en">Network name</div>
+        <div class="code-value" style="font-size:18px">Skjelde</div>
+      </div>
+      <button class="copy-btn" onclick="copyCode('Skjelde', this)">Kopier</button>
+    </div>
+    <div class="code-box">
+      <div>
+        <div class="code-label">Passord</div>
+        <div class="code-value" style="font-size:18px">Hemsedal</div>
+      </div>
+      <button class="copy-btn" onclick="copyCode('Hemsedal', this)">Kopier</button>
+    </div>
+  </div>
+
+  <!-- FASILITETER -->
+  <div class="section-sub lang-no fade-in">I leiligheten</div>
+  <div class="section-sub lang-en fade-in">In the apartment</div>
+  <div class="section-title lang-no fade-in">Fasiliteter</div>
+  <div class="section-title lang-en fade-in">Amenities</div>
+
+  <div class="info-card fade-in">
+    <h3>📺 <span class="lang-no">TV & lyd</span><span class="lang-en">TV & audio</span></h3>
+    <p class="lang-no"><strong style="color:var(--snow)">2 Smart TV-er</strong> – logg inn på dine egne strømmetjenester.<br><strong style="color:var(--snow)">Sonos-høyttaler</strong> – navn: "TV-rom". Koble til via Sonos-appen.</p>
+    <p class="lang-en"><strong style="color:var(--snow)">2 Smart TVs</strong> – log in to your own streaming services.<br><strong style="color:var(--snow)">Sonos speaker</strong> – name: "TV-rom". Connect via the Sonos app.</p>
+  </div>
+
+  <div class="info-card fade-in">
+    <h3>☕ <span class="lang-no">Kaffemaskin</span><span class="lang-en">Coffee machine</span></h3>
+    <p class="lang-no">Nespresso-maskin. Bruk vanlige <strong style="color:var(--snow)">Nespresso-kapsler</strong> (original-format).</p>
+    <p class="lang-en">Nespresso machine. Use standard <strong style="color:var(--snow)">Nespresso capsules</strong> (original format).</p>
+  </div>
+
+  <!-- UTSJEKK -->
+  <div class="divider"></div>
+  <div class="section-sub lang-no fade-in">Avreise</div>
+  <div class="section-sub lang-en fade-in">Departure</div>
+  <div class="section-title lang-no fade-in">Utsjekk innen kl. 11:00</div>
+  <div class="section-title lang-en fade-in">Check-out by 11:00</div>
+
+  <div class="info-card fade-in">
+    <h3>🧹 <span class="lang-no">Før du drar</span><span class="lang-en">Before you leave</span></h3>
+    <p class="lang-no">
+      • Legg håndklær og sengetøy på badet / ved vaskemaskin<br>
+      • Kjøkkenet ryddes (oppvaskmaskin kjøres gjerne)<br>
+      • Søppel kastes i angitte søppelrom i bygget<br>
+      • Slå av lys og elektronikk<br>
+      • Lås leilighetsdøren når du drar
+    </p>
+    <p class="lang-en">
+      • Leave towels and bedding in the bathroom / by the washing machine<br>
+      • Tidy the kitchen (feel free to run the dishwasher)<br>
+      • Dispose of rubbish in the designated bins in the building<br>
+      • Switch off lights and electronics<br>
+      • Lock the apartment door when you leave
+    </p>
+  </div>
+
+  <div class="highlight-card fade-in">
+    <div class="icon">⭐</div>
+    <div>
+      <div class="hc-title lang-no">Gi oss gjerne en tilbakemelding!</div>
+      <div class="hc-title lang-en">We'd love your feedback!</div>
+      <div class="hc-text lang-no">Hvis du likte oppholdet – en kort anmeldelse på Airbnb betyr enormt mye for oss. Tusen takk for at du valgte oss!</div>
+      <div class="hc-text lang-en">If you enjoyed your stay – a short review on Airbnb means the world to us. Thank you so much for choosing us!</div>
+    </div>
+  </div>
+
+  <!-- KONTAKT -->
+  <div class="section-sub lang-no fade-in">Hjelp</div>
+  <div class="section-sub lang-en fade-in">Help</div>
+  <div class="section-title lang-no fade-in">Kontakt</div>
+  <div class="section-title lang-en fade-in">Contact</div>
+
+  <div class="info-card fade-in">
+    <h3>💬 <span class="lang-no">Vi er tilgjengelige</span><span class="lang-en">We're available</span></h3>
+    <p class="lang-no">Send oss en melding via Airbnb hvis noe er uklart eller du trenger hjelp underveis. Vi svarer raskt!</p>
+    <p class="lang-en">Send us a message via Airbnb if anything is unclear or you need assistance. We respond quickly!</p>
+    <p style="margin-top:10px">
+      <a href="tel:112" class="lang-no">🚨 Nødsituasjon: Ring 112</a>
+      <a href="tel:112" class="lang-en">🚨 Emergency: Call 112</a>
+    </p>
+  </div>
+
+  <!-- LINK TO OTHER GUIDES -->
+  <div class="divider"></div>
+  <div class="section-sub lang-no fade-in">Mer info</div>
+  <div class="section-sub lang-en fade-in">More info</div>
+  <div class="section-title lang-no fade-in">Andre guider</div>
+  <div class="section-title lang-en fade-in">Other guides</div>
+
+  <div class="info-card fade-in">
+    <h3>🗺️ <span class="lang-no">Veibeskrivelse</span><span class="lang-en">Directions</span></h3>
+    <p class="lang-no">Detaljert kjørerute fra Oslo og Bergen, elbil-info, kollektivt og mer.</p>
+    <p class="lang-en">Detailed driving routes from Oslo and Bergen, EV info, public transport and more.</p>
+    <p style="margin-top:8px"><a href="skarsnuten-veibeskrivelse.html">→ <span class="lang-no">Åpne veibeskrivelse</span><span class="lang-en">Open directions guide</span></a></p>
+  </div>
+
+  <div class="info-card fade-in">
+    <h3>🎿 <span class="lang-no">Aktiviteter & restauranter</span><span class="lang-en">Activities & restaurants</span></h3>
+    <p class="lang-no">Alt du trenger å vite om Hemsedal – mat, spa, ski, sommer og mer.</p>
+    <p class="lang-en">Everything you need to know about Hemsedal – food, spa, skiing, summer and more.</p>
+    <p style="margin-top:8px"><a href="skarsnuten-aktivitetsguide.html">→ <span class="lang-no">Åpne aktivitetsguide</span><span class="lang-en">Open activity guide</span></a></p>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+  // Language toggle
+  function setLang(lang) {
+    document.body.className = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', (lang==='no' && b.textContent==='NO') || (lang==='en' && b.textContent==='EN')));
+  }
+
+  // Copy all codes
+  function copyAll(btn) {
+    const isNo = document.body.className === 'no';
+    const text = isNo
+      ? `Nedre Storelie 6 – Leilighet H0101\nInngang bygg:  133700#\nLeilighet:     *112255* (lukke: *)\nGarasje:       133700 + 🔑 (lengst til venstre)\nWiFi:          Skjelde / Hemsedal`
+      : `Nedre Storelie 6 – Apartment H0101\nBuilding:      133700#\nApartment:     *112255* (lock: *)\nGarage:        133700 + 🔑 (far left)\nWiFi:          Skjelde / Hemsedal`;
+    navigator.clipboard.writeText(text).then(() => {
+      const spans = btn.querySelectorAll('span');
+      spans.forEach(s => { s._orig = s.textContent; s.textContent = '✓ Kopiert!'; });
+      setTimeout(() => spans.forEach(s => s.textContent = s._orig), 2000);
+    });
+  }
+
+  // Copy code
+  function copyCode(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = '✓';
+      setTimeout(() => btn.textContent = orig, 1500);
+    });
+  }
+
+  // Stars
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 40; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.animationDelay = Math.random() * 4 + 's';
+    s.style.animationDuration = (2 + Math.random() * 3) + 's';
+    starsEl.appendChild(s);
+  }
+
+  // Fade in on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
