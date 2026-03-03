@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Skarsnuten 905 – Aktivitetsguide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0c0f14;--card:rgba(20,26,36,.7);--card-border:rgba(60,75,95,.25);--accent:#d4a45a;--accent-soft:rgba(212,164,90,.12);--text:#e8e4df;--text-muted:#8a9ab5;--text-dim:#5a6a82;--snow:#f0ece6;--warning:#e8a44a;--blue:#5b9bd5;--radius:16px}
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+  .hero{position:relative;padding:16px 20px 28px;background:linear-gradient(180deg,#151e2c,var(--bg))}
+  .hero-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+  .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-soft);border:1px solid rgba(212,164,90,.2);border-radius:100px;padding:5px 12px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+  .lang-toggle{display:flex;background:rgba(20,26,36,.6);border:1px solid var(--card-border);border-radius:10px;overflow:hidden}
+  .lang-btn{padding:7px 14px;border:none;background:transparent;color:var(--text-dim);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .25s}
+  .lang-btn.active{background:var(--accent-soft);color:var(--accent)}
+  .hero h1{font-family:'DM Serif Display',serif;font-size:26px;font-weight:400;line-height:1.2;color:var(--snow);margin-bottom:4px}
+  .hero p{color:var(--text-muted);font-size:14px}
+  .main{padding:0 20px 80px;max-width:480px;margin:0 auto}
+  .season-tabs{display:flex;gap:6px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  .season-tabs::-webkit-scrollbar{display:none}
+  .season-tab{flex-shrink:0;padding:10px 16px;border:1px solid var(--card-border);background:var(--card);color:var(--text-muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;border-radius:100px;cursor:pointer;transition:all .3s;white-space:nowrap}
+  .season-tab.active{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+  .season-content{display:none}
+  .season-content.active{display:block;animation:fadeUp .4s ease}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  .section-title{font-family:'DM Serif Display',serif;font-size:21px;color:var(--snow);margin-bottom:14px}
+  .section-sub{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:6px}
+  .act-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:18px;margin-bottom:14px}
+  .act-card h3{font-family:'DM Serif Display',serif;font-size:16px;color:var(--snow);margin-bottom:6px}
+  .act-card p{font-size:13px;color:var(--text-muted);line-height:1.6}
+  .act-card p+p{margin-top:5px}
+  .act-card a{color:var(--blue);text-decoration:none;font-weight:500}
+  .act-badge{display:inline-flex;font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px;margin-top:10px}
+  .act-badge.family{background:rgba(126,190,110,.1);color:#7abe6e;border:1px solid rgba(126,190,110,.2)}
+  .act-badge.adults{background:rgba(194,142,214,.1);color:#c28ed6;border:1px solid rgba(194,142,214,.2)}
+  .act-badge.all{background:rgba(126,184,224,.1);color:#7eb8e0;border:1px solid rgba(126,184,224,.2)}
+  .tip-box{background:linear-gradient(135deg,rgba(212,164,90,.08),rgba(212,164,90,.03));border:1px solid rgba(212,164,90,.15);border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;padding:16px 18px;margin-bottom:14px}
+  .tip-box .tip-title{font-weight:700;font-size:13px;color:var(--accent);margin-bottom:4px}
+  .tip-box p{font-size:13px;color:var(--text-muted);line-height:1.5}
+  .tip-box a{color:var(--accent);text-decoration:none;font-weight:500}
+  .spacer{height:24px}
+  .guide-footer{text-align:center;padding:32px 20px;border-top:1px solid var(--card-border);margin-top:32px}
+  .guide-footer .brand{font-family:'DM Serif Display',serif;font-size:17px;color:var(--accent);margin-bottom:2px}
+  .guide-footer p{font-size:12px;color:var(--text-dim)}
+  .fade-in{opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s}
+  .fade-in.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-topbar">
+    <div class="hero-badge"><span data-i18n="badge">Aktivitetsguide</span></div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('no')">NO</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+  <h1 data-i18n="heroTitle">Opplevelser i Hemsedal</h1>
+  <p data-i18n="heroSub">Våre beste tips – sommer som vinter</p>
+</header>
+<main class="main">
+  <div class="season-tabs fade-in" id="seasonTabs">
+    <button class="season-tab active" onclick="switchSeason('winter')">❄️ <span data-i18n="tabWinter">Vinter</span></button>
+    <button class="season-tab" onclick="switchSeason('summer')">☀️ <span data-i18n="tabSummer">Sommer</span></button>
+    <button class="season-tab" onclick="switchSeason('food')">🍽️ <span data-i18n="tabFood">Mat & drikke</span></button>
+    <button class="season-tab" onclick="switchSeason('spa')">🧖 <span data-i18n="tabSpa">Spa & velvære</span></button>
+    <button class="season-tab" onclick="switchSeason('shop')">🛍️ <span data-i18n="tabShop">Shopping</span></button>
+  </div>
+
+  <!-- WINTER NO -->
+  <div class="season-content active" id="s-winter-no">
+    <div class="section-sub">Rett utenfor døren</div>
+    <div class="section-title fade-in">Ski in / Ski out</div>
+    <div class="act-card fade-in"><h3>⛷️ Hemsedal Skisenter</h3><p>Norges nest største alpinsenter med 51 løyper fordelt på tre fjelltopper. Spenn på deg skiene utenfor døren og gli ned Alpinstien (løype 47) rett inn i heissystemet. Tilbake opp med Skarsnutenheisen.</p><p>Skipass kjøpes på <a href="https://www.skistar.com" target="_blank">skistar.com</a> – spar tid og unngå kø.</p><div class="act-badge all">Alle nivåer</div></div>
+    <div class="act-card fade-in"><h3>🧒 Valle Barneområde</h3><p>Perfekt for de minste! Valle Snøland har trygge knappheiser, transportbånd og morsomme elementer. Ligger nederst i skisenteret – nås enkelt med ski eller gratis skibuss.</p><div class="act-badge family">Barnefamilier</div></div>
+    <div class="section-sub">Mer enn ski</div>
+    <div class="section-title fade-in">Vinteraktiviteter</div>
+    <div class="act-card fade-in"><h3>🐕 Hundekjøring</h3><p>Styr din egen hundeslede gjennom fantastisk fjellterreng med utsikt mot Skogshorn. Booking via <a href="https://www.hemsedalaktiv.no" target="_blank">Hemsedal Aktiv</a> eller Dalo Fjellgård.</p><div class="act-badge all">Alle</div></div>
+    <div class="act-card fade-in"><h3>🛷 Aking fra fjellheisen</h3><p>Ta heisen opp og sus ned den lange akebakken fra topp til bunn – morsomt for barn og voksne!</p><div class="act-badge family">Barnefamilier</div></div>
+    <div class="act-card fade-in"><h3>🏔️ Toppturer på ski</h3><p>For de erfarne: spektakulære toppturer som Nibbi og Svarthetta. Anbefaler lokal fjellguide for en trygg opplevelse.</p><div class="act-badge adults">Voksne</div></div>
+    <div class="act-card fade-in"><h3>🌙 Kveldskjøring</h3><p>Opplyste løyper onsdager og fredager kl 21 i sesongen – en magisk opplevelse under stjernehimmelen.</p><div class="act-badge adults">Voksne / ungdom</div></div>
+    <div class="tip-box fade-in"><div class="tip-title">💡 Vertens tips</div><p>Stavkroa har legendary afterski – men bestill billetter på forhånd i høysesong (jul, vinterferie, påske). Se <a href="https://stavkroa.com" target="_blank">stavkroa.com</a></p></div>
+  </div>
+
+  <!-- WINTER EN -->
+  <div class="season-content" id="s-winter-en">
+    <div class="section-sub">Right outside your door</div>
+    <div class="section-title fade-in">Ski in / Ski out</div>
+    <div class="act-card fade-in"><h3>⛷️ Hemsedal Ski Resort</h3><p>Norway's second largest ski resort with 51 runs across three peaks. Click into your bindings outside the door and glide down Alpinstien (run 47) straight into the lift system. Return via Skarsnutenheisen.</p><p>Lift passes at <a href="https://www.skistar.com" target="_blank">skistar.com</a> – save time by buying ahead.</p><div class="act-badge all">All levels</div></div>
+    <div class="act-card fade-in"><h3>🧒 Valle Kids' Area</h3><p>Perfect for little ones! Valle Snowland has safe button lifts, magic carpets and fun features. At the base area – easily reached by ski or free ski bus.</p><div class="act-badge family">Families</div></div>
+    <div class="section-sub">Beyond skiing</div>
+    <div class="section-title fade-in">Winter activities</div>
+    <div class="act-card fade-in"><h3>🐕 Dog sledding</h3><p>Drive your own husky sled through stunning mountain terrain with views of Skogshorn. Book via <a href="https://www.hemsedalaktiv.no" target="_blank">Hemsedal Aktiv</a> or Dalo Fjellgård.</p><div class="act-badge all">All ages</div></div>
+    <div class="act-card fade-in"><h3>🛷 Toboggan from the top</h3><p>Ride the lift up and sled all the way back down – great fun for kids and adults alike!</p><div class="act-badge family">Families</div></div>
+    <div class="act-card fade-in"><h3>🏔️ Ski touring</h3><p>For experienced skiers: spectacular tours like Nibbi and Svarthetta. A local mountain guide is recommended for safety.</p><div class="act-badge adults">Adults</div></div>
+    <div class="act-card fade-in"><h3>🌙 Night skiing</h3><p>Floodlit runs on Wednesdays and Fridays at 21:00 in season – a magical experience under the stars.</p><div class="act-badge adults">Adults / teens</div></div>
+    <div class="tip-box fade-in"><div class="tip-title">💡 Host's tip</div><p>Stavkroa offers legendary après-ski – but book tickets in advance during peak season (Christmas, winter break, Easter). See <a href="https://stavkroa.com" target="_blank">stavkroa.com</a></p></div>
+  </div>
+
+  <!-- SUMMER NO -->
+  <div class="season-content" id="s-summer-no">
+    <div class="section-sub">Fjellturer</div>
+    <div class="section-title fade-in">Ut i naturen</div>
+    <div class="act-card fade-in"><h3>🥾 Topp 20 Fjellturer</h3><p>20 merkede topper av ulik vanskelighetsgrad – fra grønne barnevognruter til krevende svarte toppturer. Kjøp pin-merker for toppene du besøker på turistkontoret!</p><div class="act-badge all">Alle nivåer</div></div>
+    <div class="act-card fade-in"><h3>🧗 Via Ferrata</h3><p>Klatre sikkert langs fjellveggen ved Skarsnuten med stålvaier og stiger. Panoramautsikt! Booking via <a href="https://www.hemsedalaktiv.no" target="_blank">Hemsedal Aktiv</a>.</p><div class="act-badge adults">Voksne / ungdom</div></div>
+    <div class="act-card fade-in"><h3>🚴 Stisykling</h3><p>Tottelia Rides har tilrettelagte stier i tre vanskelighetsgrader. Sykkelutleie i sentrum og ved skisenteret. El-sykkel er også populært!</p><div class="act-badge all">Alle</div></div>
+    <div class="act-card fade-in"><h3>🌊 Elvesnorkling i Hemsila</h3><p>Svøm med strømmen og møt ørreten ansikt til ansikt! En av Norges mest unike naturopplevelser.</p><div class="act-badge adults">Eventyrlystne</div></div>
+    <div class="act-card fade-in"><h3>🌲 Høyt & Lavt Klatrepark</h3><p>Løyper oppe i trærne for alle nivåer – inkludert zipline over elven. Garantert suksess for barnefamilier.</p><div class="act-badge family">Barnefamilier</div></div>
+    <div class="act-card fade-in"><h3>🐴 Hesteridning</h3><p>Guidede rideturer i fjellet med Hemsedal Western Horses eller Skogshorn Rideleir.</p><div class="act-badge all">Alle</div></div>
+    <div class="act-card fade-in"><h3>🎣 Fiske</h3><p>Hemsila er en av Norges beste elver for ørretfiske. Fiskekort kan kjøpes lokalt.</p><div class="act-badge all">Alle</div></div>
+    <div class="tip-box fade-in"><div class="tip-title">💡 Vertens tips</div><p>Sjekk <a href="https://hemsedal.com/sommeraktiviteter" target="_blank">hemsedal.com</a> for oppdatert aktivitetskalender og booking.</p></div>
+  </div>
+
+  <!-- SUMMER EN -->
+  <div class="season-content" id="s-summer-en">
+    <div class="section-sub">Hiking</div>
+    <div class="section-title fade-in">Into the mountains</div>
+    <div class="act-card fade-in"><h3>🥾 Top 20 Mountain Hikes</h3><p>20 marked summits from easy stroller-friendly trails to challenging black-rated peaks. Collect pin badges at the tourist office!</p><div class="act-badge all">All levels</div></div>
+    <div class="act-card fade-in"><h3>🧗 Via Ferrata</h3><p>Climb safely along the cliff at Skarsnuten with steel cables and ladders. Panoramic views! Book via <a href="https://www.hemsedalaktiv.no" target="_blank">Hemsedal Aktiv</a>.</p><div class="act-badge adults">Adults / teens</div></div>
+    <div class="act-card fade-in"><h3>🚴 Mountain biking</h3><p>Tottelia Rides has purpose-built trails in three difficulty levels. Bike rental in the centre and at the ski resort. E-bikes also popular!</p><div class="act-badge all">All ages</div></div>
+    <div class="act-card fade-in"><h3>🌊 River snorkelling in Hemsila</h3><p>Float downstream and meet trout face-to-face! One of Norway's most unique nature experiences.</p><div class="act-badge adults">Adventurous</div></div>
+    <div class="act-card fade-in"><h3>🌲 Høyt & Lavt Climbing Park</h3><p>Treetop courses for all levels including a zipline across the river. A guaranteed hit with families.</p><div class="act-badge family">Families</div></div>
+    <div class="act-card fade-in"><h3>🐴 Horseback riding</h3><p>Guided mountain rides with Hemsedal Western Horses or Skogshorn Riding Camp.</p><div class="act-badge all">All ages</div></div>
+    <div class="act-card fade-in"><h3>🎣 Fishing</h3><p>The Hemsila river is one of Norway's best for trout fishing. Permits available locally.</p><div class="act-badge all">All ages</div></div>
+    <div class="tip-box fade-in"><div class="tip-title">💡 Host's tip</div><p>Check <a href="https://hemsedal.com/sommeraktiviteter" target="_blank">hemsedal.com</a> for updated activity calendar and booking.</p></div>
+  </div>
+
+  <!-- FOOD NO -->
+  <div class="season-content" id="s-food-no">
+    <div class="section-sub">Våre favoritter</div>
+    <div class="section-title fade-in">Restauranter & barer</div>
+    <div class="act-card fade-in"><h3>🍷 Restaurant Lynx – Skarsnuten Hotel</h3><p>Vår nærmeste nabo, kun 500 m unna. Nordisk eleganse møter italiensk lidenskap. Fantastisk middag med panoramautsikt, eller drinker på den store uteterrassen.</p><p>Også: <strong style="color:var(--snow)">Restaurant Miru</strong> – japansk med nordisk vri.</p><div class="act-badge all">Anbefalt</div></div>
+    <div class="act-card fade-in"><h3>🏔️ Skigaarden</h3><p>Midt i skisenteret med flere restauranter under ett tak. <strong style="color:var(--snow)">Storstugu</strong> for fine dining (fantastisk champagnemeny!). <strong style="color:var(--snow)">Omakase</strong> for eksklusiv 12-retters sjømat (forhåndsbestilling). <strong style="color:var(--snow)">Dagligstugu</strong> for god pizza og lunsj.</p><div class="act-badge all">Alle</div></div>
+    <div class="act-card fade-in"><h3>☕ Hemsedal Café</h3><p>Sentralt i bygda med fokus på lokale råvarer. Samarbeid med Brandvoll Fjellgard. Perfekt for en avslappet middag.</p><div class="act-badge all">Alle</div></div>
+    <div class="act-card fade-in"><h3>🎉 Stavkroa</h3><p>Verdensberømt afterski! Også <strong style="color:var(--snow)">Døli</strong> (ny bar/restaurant i kjelleren) og <strong style="color:var(--snow)">Kitchen Bar</strong>. Bowling og sportsbar finnes også.</p><div class="act-badge adults">Voksne</div></div>
+    <div class="act-card fade-in"><h3>🍕 Lodgen Spiseri</h3><p>Ved barneområdet – åpent fra morgen til kveld. Frokost, lunsj og italiensk pizza på kvelden. Barnemeny tilgjengelig.</p><div class="act-badge family">Barnefamilier</div></div>
+    <div class="tip-box fade-in"><div class="tip-title">👨‍🍳 Kokk på hytta</div><p>Bestill en privat kokk som tilbereder middag hjemme i leiligheten. Kontakt Lodgen Spiseri eller Hallingdal Catering.</p></div>
+  </div>
+
+  <!-- FOOD EN -->
+  <div class="season-content" id="s-food-en">
+    <div class="section-sub">Our favourites</div>
+    <div class="section-title fade-in">Restaurants & bars</div>
+    <div class="act-card fade-in"><h3>🍷 Restaurant Lynx – Skarsnuten Hotel</h3><p>Our nearest neighbour, just 500 m away. Nordic elegance meets Italian passion. Outstanding dinner with panoramic views, or drinks on the large outdoor terrace.</p><p>Also: <strong style="color:var(--snow)">Restaurant Miru</strong> – Japanese with a Nordic twist.</p><div class="act-badge all">Recommended</div></div>
+    <div class="act-card fade-in"><h3>🏔️ Skigaarden</h3><p>In the ski resort with several restaurants under one roof. <strong style="color:var(--snow)">Storstugu</strong> for fine dining (amazing champagne menu!). <strong style="color:var(--snow)">Omakase</strong> for exclusive 12-course seafood (advance booking). <strong style="color:var(--snow)">Dagligstugu</strong> for great pizza and lunch.</p><div class="act-badge all">Everyone</div></div>
+    <div class="act-card fade-in"><h3>☕ Hemsedal Café</h3><p>In the village centre with focus on local ingredients. Partnership with Brandvoll Fjellgard. Perfect for a relaxed dinner.</p><div class="act-badge all">Everyone</div></div>
+    <div class="act-card fade-in"><h3>🎉 Stavkroa</h3><p>World-famous après-ski! Also <strong style="color:var(--snow)">Døli</strong> (new basement bar & restaurant) and <strong style="color:var(--snow)">Kitchen Bar</strong>. Bowling and sports bar too.</p><div class="act-badge adults">Adults</div></div>
+    <div class="act-card fade-in"><h3>🍕 Lodgen Spiseri</h3><p>By the kids' area – open morning to evening. Breakfast, lunch and Italian pizza in the evening. Kids' menu available.</p><div class="act-badge family">Families</div></div>
+    <div class="tip-box fade-in"><div class="tip-title">👨‍🍳 Private chef</div><p>Book a private chef who prepares dinner in the apartment. Contact Lodgen Spiseri or Hallingdal Catering.</p></div>
+  </div>
+
+  <!-- SPA NO -->
+  <div class="season-content" id="s-spa-no">
+    <div class="section-sub">Slapp av</div>
+    <div class="section-title fade-in">Spa & velvære</div>
+    <div class="act-card fade-in"><h3>💆 Skarsnuten Spa</h3><p>Kun 500 meter fra leiligheten! Spa og treningssenter med alt du trenger for avslapning i høyden. Book behandling i god tid, spesielt i høysesong.</p><div class="act-badge all">Alle</div></div>
+    <div class="act-card fade-in"><h3>🏊 Fýri Resort Pool Club</h3><p>Prisbelønt pool club nede i dalen ved Totteskogen. Kontinental strandklubb-følelse midt på fjellet – en unik opplevelse.</p><div class="act-badge adults">Voksne</div></div>
+    <div class="tip-box fade-in"><div class="tip-title">💡 Vertens tips</div><p>Kombiner spa-ettermiddag på Skarsnuten Hotel med middag på Lynx etterpå. Alt er gangavstand fra leiligheten!</p></div>
+  </div>
+
+  <!-- SPA EN -->
+  <div class="season-content" id="s-spa-en">
+    <div class="section-sub">Relax</div>
+    <div class="section-title fade-in">Spa & wellness</div>
+    <div class="act-card fade-in"><h3>💆 Skarsnuten Spa</h3><p>Just 500 metres from the apartment! Spa and fitness centre for ultimate relaxation at altitude. Book treatments well in advance during peak season.</p><div class="act-badge all">Everyone</div></div>
+    <div class="act-card fade-in"><h3>🏊 Fýri Resort Pool Club</h3><p>Award-winning pool club in the valley at Totteskogen. Continental beach club vibes in the mountains – a unique experience.</p><div class="act-badge adults">Adults</div></div>
+    <div class="tip-box fade-in"><div class="tip-title">💡 Host's tip</div><p>Combine a spa afternoon at Skarsnuten Hotel with dinner at Lynx afterwards. Everything is walking distance from the apartment!</p></div>
+  </div>
+
+  <!-- SHOP NO -->
+  <div class="season-content" id="s-shop-no">
+    <div class="section-sub">Lokalt</div>
+    <div class="section-title fade-in">Shopping & gårdsutsalg</div>
+    <div class="act-card fade-in"><h3>👕 Klær & sport</h3><p>Eksklusiv sportsmote (Amundsen, Fusalp, Moon Boot) hos <strong style="color:var(--snow)">Finbeck og Fia</strong> og <strong style="color:var(--snow)">Moniker Sport</strong> i sentrum.</p></div>
+    <div class="act-card fade-in"><h3>🧀 Lokalmat</h3><p><strong style="color:var(--snow)">Brandvoll Fjellgaard</strong> – gårdsutsalg med lokale spesialiteter.<br><strong style="color:var(--snow)">Hemsedal Flatbrødbakeri</strong> (Ein Smak Tå Hemsedal) på Tuv – hjemmebakt flatbrød og delikatesser.</p></div>
+    <div class="act-card fade-in"><h3>🛋️ Interiør</h3><p><strong style="color:var(--snow)">Hemsedal Møbler</strong> – flott interiør og hytteutstyr av høy kvalitet.</p></div>
+    <div class="spacer"></div>
+    <div class="section-sub">Praktisk</div>
+    <div class="section-title fade-in">Dagligvarer & apotek</div>
+    <div class="act-card fade-in"><h3>🛒 Matbutikker</h3><p><strong style="color:var(--snow)">Matkroken Alpin</strong> (SkiStar Lodge) – 3 min bil, vintersesong.<br><strong style="color:var(--snow)">Coop Extra</strong> – 10 min bil.<br><strong style="color:var(--snow)">Spar</strong> (Rampa) – 10 min bil.<br><strong style="color:var(--snow)">Kiwi</strong> – sentrum, 12 min bil. Åpent 07–23 (søn 09–21).</p></div>
+    <div class="act-card fade-in"><h3>💊 Apotek & lege</h3><p><strong style="color:var(--snow)">Hemsedal Apotek</strong> – midt i sentrum.<br><strong style="color:var(--snow)">Hemsedal Legekontor</strong> – Hemsedalsvegen. Legevakt: <a href="tel:116117">116 117</a></p></div>
+  </div>
+
+  <!-- SHOP EN -->
+  <div class="season-content" id="s-shop-en">
+    <div class="section-sub">Local</div>
+    <div class="section-title fade-in">Shopping & farm shops</div>
+    <div class="act-card fade-in"><h3>👕 Fashion & sport</h3><p>Premium sportswear (Amundsen, Fusalp, Moon Boot) at <strong style="color:var(--snow)">Finbeck og Fia</strong> and <strong style="color:var(--snow)">Moniker Sport</strong> in the centre.</p></div>
+    <div class="act-card fade-in"><h3>🧀 Local food</h3><p><strong style="color:var(--snow)">Brandvoll Fjellgaard</strong> – farm shop with local specialities.<br><strong style="color:var(--snow)">Hemsedal Flatbrødbakeri</strong> (Ein Smak Tå Hemsedal) at Tuv – home-baked flatbread and delicacies.</p></div>
+    <div class="act-card fade-in"><h3>🛋️ Interior design</h3><p><strong style="color:var(--snow)">Hemsedal Møbler</strong> – high-quality furniture and cabin interiors.</p></div>
+    <div class="spacer"></div>
+    <div class="section-sub">Practical</div>
+    <div class="section-title fade-in">Groceries & pharmacy</div>
+    <div class="act-card fade-in"><h3>🛒 Grocery shops</h3><p><strong style="color:var(--snow)">Matkroken Alpin</strong> (SkiStar Lodge) – 3 min drive, winter only.<br><strong style="color:var(--snow)">Coop Extra</strong> – 10 min drive.<br><strong style="color:var(--snow)">Spar</strong> (Rampa) – 10 min drive.<br><strong style="color:var(--snow)">Kiwi</strong> – centre, 12 min drive. Open 07–23 (Sun 09–21).</p></div>
+    <div class="act-card fade-in"><h3>💊 Pharmacy & doctor</h3><p><strong style="color:var(--snow)">Hemsedal Apotek</strong> – central location.<br><strong style="color:var(--snow)">Hemsedal Medical Centre</strong> – Hemsedalsvegen. Emergency: <a href="tel:116117">116 117</a></p></div>
+  </div>
+
+  <footer class="guide-footer">
+    <div class="brand">Skarsnuten 905</div>
+    <p>Hemsedal – 1000 moh</p>
+  </footer>
+</main>
+<script>
+const T={badge:{no:'Aktivitetsguide',en:'Activity guide'},heroTitle:{no:'Opplevelser i Hemsedal',en:'Experiences in Hemsedal'},heroSub:{no:'Våre beste tips – sommer som vinter',en:'Our best tips – summer and winter'},tabWinter:{no:'Vinter',en:'Winter'},tabSummer:{no:'Sommer',en:'Summer'},tabFood:{no:'Mat & drikke',en:'Food & drink'},tabSpa:{no:'Spa & velvære',en:'Spa & wellness'},tabShop:{no:'Shopping',en:'Shopping'}};
+let lang='no',season='winter';
+const seasons=['winter','summer','food','spa','shop'];
+function setLang(l){lang=l;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.trim()===l.toUpperCase()));document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(T[k])el.textContent=T[k][l]});showSeason()}
+function switchSeason(s){season=s;document.querySelectorAll('.season-tab').forEach((t,i)=>t.classList.toggle('active',seasons[i]===s));showSeason()}
+function showSeason(){document.querySelectorAll('.season-content').forEach(c=>{c.classList.remove('active');c.style.display='none'});const el=document.getElementById('s-'+season+'-'+lang);if(el){el.style.display='block';el.classList.add('active');el.querySelectorAll('.fade-in:not(.visible)').forEach(f=>obs.observe(f))}}
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*50);obs.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
